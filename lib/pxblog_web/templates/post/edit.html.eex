@@ -1,0 +1,5 @@
+<h1>Edit Post</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.user_post_path(@conn, :update, @user, @post)) %>
+
+<span><%= link "Back", to: Routes.user_post_path(@conn, :index, @user) %></span>
