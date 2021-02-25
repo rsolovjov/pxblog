@@ -11,6 +11,7 @@ defmodule Pxblog.Posts.Post do
     timestamps()
 
     belongs_to :user, User
+    has_many :comments, Pxblog.Comments.Comment
   end
 
   @doc false
