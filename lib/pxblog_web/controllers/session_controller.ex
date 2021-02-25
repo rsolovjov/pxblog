@@ -8,8 +8,8 @@ defmodule PxblogWeb.SessionController do
 
   plug :scrub_params, "user" when action in [:create]
 
-  def new(conn, params) do
-    render conn, "new.html", changeset: User.changeset(%User{}, params)
+  def new(conn, _params) do
+    render conn, "new.html", changeset: User.changeset(%User{}, %{})
   end
 
   def create(conn, %{"user" => %{"username" => username, "password" => password}})

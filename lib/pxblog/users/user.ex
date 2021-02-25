@@ -12,6 +12,7 @@ defmodule Pxblog.Users.User do
     timestamps()
 
     has_many :posts, Post
+    belongs_to :role, Pxblog.Roles.Role
 
     # Virtual Fields
     field :password, :string, virtual: true
@@ -21,8 +22,8 @@ defmodule Pxblog.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :email, :password, :password_confirmation])
-    |> validate_required([:username, :email, :password, :password_confirmation])
+    |> cast(attrs, [:username, :email, :password, :password_confirmation, :role_id])
+    |> validate_required([:username, :email, :password, :password_confirmation, :role_id])
     |> hash_password
   end
 

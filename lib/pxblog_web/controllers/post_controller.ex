@@ -1,6 +1,7 @@
 defmodule PxblogWeb.PostController do
   use PxblogWeb, :controller
   plug :assign_user
+  plug :authorize_user when action in [:new, :create, :update, :edit, :delete]
   #import Ecto.Query, warn: false
   import Ecto
   alias Pxblog.Repo
@@ -77,8 +78,10 @@ defmodule PxblogWeb.PostController do
   defp assign_user(conn, _opts) do
     case conn.params do
       %{"user_id" => user_id} ->
-        user = Repo.get(User, user_id)
-        assign(conn, :user, user)
+        case Repo.get(User, user_id) do
+          nil  -> invalid_user(conn)
+          user -> assign(conn, :user, user)
+        end
       _ ->
         invalid_user(conn)
     end
@@ -90,4 +93,17 @@ defmodule PxblogWeb.PostController do
     |> redirect(to: Routes.page_path(conn, :index))
     |> halt
   end
+
+  defp authorize_user(conn, _opts) do
+    user = get_session(conn, :current_user)
+    if user && Integer.to_string(user.id) == conn.params["user_id"] do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to modify that post!")
+      |> redirect(to: Routes.page_path(conn, :index))
+      |> halt()
+    end
+  end
+
 end
