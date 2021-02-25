@@ -43,7 +43,8 @@ defmodule Pxblog.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:comeonin, "~> 2.3"}
+      {:comeonin, "~> 2.3"},
+      {:earmark, "~> 1.0.1"}
     ]
   end
 
