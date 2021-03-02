@@ -11,8 +11,8 @@
 # and so on) as they will fail if something goes wrong.
 
 alias Pxblog.Repo
-alias Pxblog.Role
-alias Pxblog.User
+alias Pxblog.Roles.Role
+alias Pxblog.Users.User
 import Ecto.Query, only: [from: 2]
 
 find_or_create_role = fn role_name, admin ->

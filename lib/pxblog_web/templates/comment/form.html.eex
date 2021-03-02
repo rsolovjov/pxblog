@@ -12,12 +12,12 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :body %>
-    <%= textarea f, :body, id: "body-editor" %>
+    <%= label f, :body, class: "control-label" %>
+    <%= textarea f, :body, class: "form-control" %>
     <%= error_tag f, :body %>
   </div>
-  
+
   <div class="form-group">
-    <%= submit "Submit" %>
+    <%= submit "Submit", class: "btn btn-primary create-comment" %>
   </div>
 <% end %>
